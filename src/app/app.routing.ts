@@ -27,6 +27,9 @@ import { ErrorComponentComponent } from './pages/error-component/error-component
 import { AccesDeniedComponent } from './pages/acces-denied/acces-denied.component';
 import { ReclamUserComponent } from './pages/reclam-user/reclam-user.component';
 import { ReclamUserlistComponent } from './pages/reclam-userlist/reclam-userlist.component';
+import { ReclamAdminComponent } from './pages/reclam-admin/reclam-admin.component';
+import { FeedbackUserComponent } from './pages/feedback-user/feedback-user.component';
+import { FeedbackAdminComponent } from './pages/feedback-admin/feedback-admin.component';
 //import { SubscribeComponent } from './pages/subscribe/subscribe.component';
 
 const routes: Routes = [
@@ -176,9 +179,25 @@ const routes: Routes = [
       // Add AuthGuard here
       canActivate: [AuthGuard]
     },
+    { 
+      path: 'reclamationAdmin', 
+      component: ReclamAdminComponent,
+      // Add AuthGuard here
+      canActivate: [AuthGuard]
+    },
+    { 
+      path: 'feedbackUser', 
+      component: FeedbackUserComponent,
+      // Add AuthGuard here
+      canActivate: [AuthGuard]
+    },
+    { 
+      path: 'feedbackAdmin', 
+      component: FeedbackAdminComponent,
+      // Add AuthGuard here
+      canActivate: [AuthGuard]
+    },
     
-
-
     // Add a wildcard route for handling incorrect paths
   { path: 'AccesDenied' , component: AccesDeniedComponent },
   { path: 'error' , component: ErrorComponentComponent },

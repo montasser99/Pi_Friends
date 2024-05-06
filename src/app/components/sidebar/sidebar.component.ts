@@ -18,7 +18,11 @@ export const ROUTES: RouteInfo[] = [
     { path: '/users', title: 'users',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/tables', title: 'Posts',  icon:'ni-bullet-list-67 text-red', class: '' },
     { path: '/comments', title: 'Comments',  icon:'ni-chat-round text-green', class: '' },
-    { path: '/reclamationListUser', title: 'Reclamation',  icon:'ni-chat-round text-green', class: '' } //reclam user
+    { path: '/reclamationListUser', title: 'Reclamation',  icon:'ni-chat-round text-green', class: '' }, //reclam user
+    { path: '/reclamationAdmin', title: 'Reclamation Admin',  icon:'ni-chat-round text-green', class: '' }, //reclam user
+    { path: '/feedbackUser', title: 'Feedback',  icon:'ni-chat-round text-green', class: '' }, //reclam user
+    { path: '/feedbackAdmin', title: 'Feedback Admin',  icon:'ni-chat-round text-green', class: '' } //reclam user
+
 ];
 
 @Component({

@@ -25,6 +25,9 @@ import { ErrorComponentComponent } from './pages/error-component/error-component
 import { AccesDeniedComponent } from './pages/acces-denied/acces-denied.component';
 import { ReclamUserComponent } from './pages/reclam-user/reclam-user.component';
 import { ReclamUserlistComponent } from './pages/reclam-userlist/reclam-userlist.component';
+import { ReclamAdminComponent } from './pages/reclam-admin/reclam-admin.component';
+import { FeedbackUserComponent } from './pages/feedback-user/feedback-user.component';
+import { FeedbackAdminComponent } from './pages/feedback-admin/feedback-admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { ReclamUserlistComponent } from './pages/reclam-userlist/reclam-userlist
     AccesDeniedComponent,
     ReclamUserComponent,
     ReclamUserlistComponent,
+    ReclamAdminComponent,
+    FeedbackUserComponent,
+    FeedbackAdminComponent,
 
   ],
   imports: [
@@ -56,6 +62,7 @@ import { ReclamUserlistComponent } from './pages/reclam-userlist/reclam-userlist
     AppRoutingModule,
     ComponentsModule,
     ToastrModule.forRoot() 
+
   ],
   providers: [],
   bootstrap: [AppComponent]

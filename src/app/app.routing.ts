@@ -25,6 +25,8 @@ import { LoginLayoutComponent } from './components/LoginComponent/login-layout.c
 import { AuthGuard } from './Service/AuthGuard';
 import { ErrorComponentComponent } from './pages/error-component/error-component.component';
 import { AccesDeniedComponent } from './pages/acces-denied/acces-denied.component';
+import { ReclamUserComponent } from './pages/reclam-user/reclam-user.component';
+import { ReclamUserlistComponent } from './pages/reclam-userlist/reclam-userlist.component';
 //import { SubscribeComponent } from './pages/subscribe/subscribe.component';
 
 const routes: Routes = [
@@ -157,6 +159,26 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
     /**end subscription routes */
+
+
+
+    //**start routes reclamation user  */
+    { 
+      path: 'reclamationUser', 
+      component: ReclamUserComponent,
+      // Add AuthGuard here
+      canActivate: [AuthGuard]
+    },
+    
+    { 
+      path: 'reclamationListUser', 
+      component: ReclamUserlistComponent,
+      // Add AuthGuard here
+      canActivate: [AuthGuard]
+    },
+    
+
+
     // Add a wildcard route for handling incorrect paths
   { path: 'AccesDenied' , component: AccesDeniedComponent },
   { path: 'error' , component: ErrorComponentComponent },

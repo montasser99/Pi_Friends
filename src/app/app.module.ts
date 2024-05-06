@@ -23,6 +23,8 @@ import { TablesComponent } from './pages/tables/tables.component';
 import { LoginLayoutComponent } from './components/LoginComponent/login-layout.component';
 import { ErrorComponentComponent } from './pages/error-component/error-component.component';
 import { AccesDeniedComponent } from './pages/acces-denied/acces-denied.component';
+import { ReclamUserComponent } from './pages/reclam-user/reclam-user.component';
+import { ReclamUserlistComponent } from './pages/reclam-userlist/reclam-userlist.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { AccesDeniedComponent } from './pages/acces-denied/acces-denied.componen
     LoginLayoutComponent,
     ErrorComponentComponent,
     AccesDeniedComponent,
+    ReclamUserComponent,
+    ReclamUserlistComponent,
 
   ],
   imports: [

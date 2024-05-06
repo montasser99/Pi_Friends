@@ -1,0 +1,24 @@
+<!-- reclam-user.component.html -->
+<div class="card shadow">
+    <div class="card-body">
+      <h5 class="card-title">Add Reclamation</h5>
+      <form [formGroup]="reclamationForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+          <div *ngIf="reclamationForm.get('title').invalid && reclamationForm.get('title').touched" class="invalid-feedback">
+            Title is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">Content</label>
+          <textarea class="form-control" id="content" formControlName="content"></textarea>
+          <div *ngIf="reclamationForm.get('content').invalid && reclamationForm.get('content').touched" class="invalid-feedback">
+            Content is required
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  

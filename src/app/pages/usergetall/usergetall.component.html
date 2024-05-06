@@ -20,10 +20,7 @@
                 <td>{{ user.lastname ? user.lastname : 'No data available' }}</td>
                 <td>
                 <div role="group" aria-label="Actions">
-                    <button class="btn btn-success btn-square mr-3" (click)="editSubscription(subscription.idSub)">
-                      <i class="ni ni-ruler-pencil"></i>
-                    </button>
-                    <button class="btn btn-danger btn-square" (click)="deleteSubscription(subscription.idSub)">
+                    <button class="btn btn-danger btn-square" (click)="deleteUser(user.id)">
                       <i class="ni ni-fat-remove"></i>
                     </button>
                   </div>

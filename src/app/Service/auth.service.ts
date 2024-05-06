@@ -121,4 +121,17 @@ export class AuthService {
     }
     return true;
   }
+
+
+  deleteUserById(userId: number): Observable<any> {
+    const deleteUserUrl = `http://localhost:9200/api/v1/user/deleteId/${userId}`;
+    return this.http.delete(deleteUserUrl).pipe(
+      tap(() => {
+        // Optionally perform any actions after successful deletion
+        console.log(`User with ID ${userId} deleted successfully`);
+      })
+    );
+  }
+
+
 }

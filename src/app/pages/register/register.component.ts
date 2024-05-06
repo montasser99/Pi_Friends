@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {  Router } from '@angular/router';
 import { AuthService } from 'src/app/Service/auth.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   email: string = ''; // Define email property
   password: string = ''; // Define password property
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -31,8 +32,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
   
     // Call the register method from AuthService
-    this.authService.register(user).subscribe(
-      response => {
+    this.authService.register(user).subscribe( response => {
         // Handle successful registration
         
         // Show success notification using Swal
@@ -44,6 +44,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
           timerProgressBar: true,
           showConfirmButton: false
         });
+        this.router.navigate(['/login']).then(
+          () => console.log('Navigation to /login successful'),
+          error => console.error('Navigation to /login failed:', error)
+        );
+
   
         // You can also navigate to another page upon successful registration if needed
       },

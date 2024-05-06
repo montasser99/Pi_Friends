@@ -54,14 +54,11 @@
                 <input class="form-control" placeholder="Password" type="password" name="password" [(ngModel)]="password">
               </div>
             </div>
-            <!-- <div class="custom-control custom-control-alternative custom-checkbox">
-              <input class="custom-control-input" id="customCheckLogin" type="checkbox" name="rememberMe" [(ngModel)]="rememberMe">
-              <label class="custom-control-label" for="customCheckLogin">
-                <span class="text-muted">Remember me</span>
-              </label>
-            </div> -->
-            <div class="mb-3">
+
+            <div class="mb-3 d-flex flex justify-content-between ">
               <a routerLink="/forget-pwd" class="text-primary">Forgot Password?</a>
+              <a routerLink="/register" class="text-primary">Register</a>
+
             </div>
             
             <div class="text-center">
@@ -72,14 +69,7 @@
           
         </div>
       </div>
-      <div class="row mt-3">
-        <div class="col-6">
-          <a href="javascript:void(0)" class="text-light"><small>Forgot password?</small></a>
-        </div>
-        <div class="col-6 text-right">
-          <a href="javascript:void(0)" class="text-light"><small>Create new account</small></a>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/Service/auth.service';
 import { DashboardService } from 'src/app/Service/dashboard.service';
 import { GestionuserService } from 'src/app/Service/gestionuser.service';
 
@@ -18,7 +20,7 @@ export class UsergetallComponent implements OnInit {
     pages: number[] = [];
     //end code pagination
 
-  constructor(private GestionuserService:GestionuserService , private dashboardservice:DashboardService) { }
+  constructor(private GestionuserService:GestionuserService , private dashboardservice:DashboardService , private authSerivce:AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadPostes();
@@ -37,7 +39,12 @@ export class UsergetallComponent implements OnInit {
     });
   }
 
-  
+  deleteUser(id:number){
+    this.authSerivce.deleteUserById(id).subscribe(data => {
+      this.toastr.success(' User Deleted successfully!', 'Success');
+      this.loadPostes();
+    });
+  }
 
   //pagination code here
   setPage(page: number) {

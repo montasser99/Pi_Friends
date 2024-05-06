@@ -27,7 +27,7 @@
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <!-- Votre carte de profil va ici -->
     </div>
-    <div class="col-xl-9 order-xl-1 mx-auto" style="max-width: 800px">
+    <div class="col-xl-9 order-xl-1 mx-auto" style="max-width: 1000px">
       <div class="card bg-secondary shadow w-100">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
@@ -47,6 +47,7 @@
                 <th scope="col">Content</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date</th>
+                <th scope="col">poste</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -56,6 +57,8 @@
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.description }}</td>
                 <td>{{ comment.datePub }}</td>
+                <td>{{ comment.poste ? comment.poste.title : '-' }}</td>
+
                 <td>
                   <div style="display: flex; align-items: center">
                     <span

@@ -84,7 +84,7 @@
                     <a (click)="updateSelectedPost(post)" placement="top-center" style="cursor: pointer" ngbTooltip="Update Poste">
                       <i class="ni ni-ruler-pencil text-info"></i>
                     </a>                    
-                    <a routerLink="/add-comment" placement="top-center" style="cursor: pointer" ngbTooltip="Add Comment">
+                    <a [routerLink]="['/add-comment', post.idPoste]" placement="top-center" style="cursor: pointer" ngbTooltip="Add Comment" >
                       <i class="ni ni-fat-add text-green"></i>
                     </a>
                   </div>

@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   public decodedToken: any; // Declare decodedToken property
+  public poste: any; // Declare poste property
 
   constructor(location: Location, private element: ElementRef, private router: Router, private jwtDecodeService: JwtDecodeService) {
     this.location = location;
@@ -22,8 +23,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
 
-    //this using for get data from localstorage
-    //si tu veux tester sur admin or no use decodedToken.authorities[0]
+    // This is used to get data from local storage
+    // If you want to test for admin or not, use decodedToken.authorities[0]
     const token = localStorage.getItem('jwt_token');
     if (token) {
       this.decodedToken = this.jwtDecodeService.decodeToken(); // Assign decoded token to decodedToken property
@@ -31,21 +32,25 @@ export class NavbarComponent implements OnInit {
     } else {
       console.log('Token not found in local storage');
     }
-  
+
+    // Call the getTitle() function to get the title when component initializes
+    this.getTitle();
   }
 
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#') {
+    if (titlee.charAt(0) === '#') {
         titlee = titlee.slice(1);
     }
 
-    for(var item = 0; item < this.listTitles.length; item++) {
-        if(this.listTitles[item].path === titlee) {
-            return this.listTitles[item].title;
+    for (var item = 0; item < this.listTitles.length; item++) {
+        if (this.listTitles[item].path === titlee) {
+            // Set the poste property to the current listTitle object
+            this.poste = this.listTitles[item];
+            return this.poste.title;
         }
     }
-    return this.listTitles[item].title;
+    return "Default Title"; // Return a default title if no matching title found
   }
 
   logout() {

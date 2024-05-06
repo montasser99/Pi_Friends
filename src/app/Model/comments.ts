@@ -5,6 +5,7 @@ export class Comments {
     content: string;
     description: string;
     datePub: Date;
-    postId: number;
-}
+    poste: Poste; // Change from postId to poste object
+    
 
+}

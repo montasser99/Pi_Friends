@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from
 import { Poste } from 'src/app/Model/poste';
 import { PosteServiceService } from 'src/app/Service/poste-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,7 +14,7 @@ export class UserProfileComponent implements OnInit {
   Add: FormGroup;
   poste: Poste = new Poste();
 
-  constructor(private posteServiceService: PosteServiceService, private toastr: ToastrService) { }
+  constructor(private posteServiceService: PosteServiceService, private toastr: ToastrService, private router:Router) { }
 
   ngOnInit() {
     // Initialize current date
@@ -38,6 +39,7 @@ export class UserProfileComponent implements OnInit {
           console.log('New subscription added:', response);
           this.toastr.success('Post added successfully!', 'Success');
           this.Add.reset();
+          this.router.navigate(['/tables']);
         },
         (error) => {
           console.error('Error adding subscription:', error);

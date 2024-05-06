@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Poste } from 'src/app/Model/poste';
 import { PosteServiceService } from 'src/app/Service/poste-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-poste',
@@ -12,11 +13,13 @@ export class UpdatePosteComponent implements OnInit {
   poste: Poste = new Poste();
   postId: number;
   errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(
     private posteService: PosteServiceService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService // Injectez le service ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -27,9 +30,15 @@ export class UpdatePosteComponent implements OnInit {
   }
 
   getPosteById(id: number): void {
-    this.posteService.getPosteById(id).subscribe(data => {
-      this.poste = data;
-    });
+    this.posteService.getPosteById(id).subscribe(
+      data => {
+        this.poste = data;
+      },
+      error => {
+        console.error('Error fetching poste:', error);
+        this.errorMessage = 'Failed to fetch the poste.';
+      }
+    );
   }
 
   onSubmit(): void {
@@ -37,10 +46,12 @@ export class UpdatePosteComponent implements OnInit {
     this.posteService.update(this.poste).subscribe(
       updatedPoste => {
         console.log('Post updated:', updatedPoste);
-        this.router.navigate(['/tables']);
+        this.toastr.success('Post updated successfully!', 'Success'); 
+        setTimeout(() => {
+          this.router.navigate(['/tables']);
+        });
       },
       error => {
-        // Gestion des erreurs
         console.error('Error updating poste:', error);
         this.errorMessage = 'Failed to update the poste.';
       }

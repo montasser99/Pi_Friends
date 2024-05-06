@@ -13,7 +13,7 @@ export class TablesComponent implements OnInit {
 
   poste: Poste[];
   searchTerm: string;
-
+  id : number;
   constructor(
     private posteServiceService: PosteServiceService,
     private toastr: ToastrService,
@@ -23,6 +23,7 @@ export class TablesComponent implements OnInit {
 
   ngOnInit() {
     this.loadPostes();
+
   }
 
   loadPostes() {

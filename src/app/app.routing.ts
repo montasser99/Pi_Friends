@@ -51,7 +51,11 @@ const routes: Routes = [
   {
     path: 'add-comment',
     component: AddCommentComponent,
-    // Add AuthGuard here
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-comment/:id',
+    component: AddCommentComponent,
     canActivate: [AuthGuard]
   },
   {

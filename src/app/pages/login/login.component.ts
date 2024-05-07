@@ -14,24 +14,24 @@ export class LoginComponent implements OnInit {
   password: string = ''; // Define password property
   rememberMe: boolean = false; // Define rememberMe property
 
-  
-  constructor(private router: Router,private authService: AuthService) {}
 
-  ngOnInit() {}
+  constructor( private authService: AuthService, private router:Router) { }
+
+  ngOnInit() { }
 
 
   // Define the login method
   login(loginForm: NgForm) {
-    const user = { email: this.email, password: this.password};
-  
+    const user = { email: this.email, password: this.password };
+
     // Call the login method from AuthService
     this.authService.login(user).subscribe(
       response => {
         // Handle successful login
-        
+
         const token = response.token;
         this.authService.setToken(token);
-        
+
         // Show success notification using Swal
         Swal.fire({
           icon: 'success',
@@ -41,13 +41,13 @@ export class LoginComponent implements OnInit {
           timerProgressBar: true,
           showConfirmButton: false
         });
-  this.redirectBasedOnRole();
+        this.router.navigateByUrl('/dashboard');
         // You can also navigate to another page upon successful login if needed
       },
       error => {
         // Handle login error
         console.error('Login failed:', error);
-  
+
         // Show error notification using Swal
         Swal.fire({
           icon: 'error',
@@ -57,31 +57,10 @@ export class LoginComponent implements OnInit {
         });
       }
     );
-  
+
     // Reset the form after submission
     loginForm.reset();
   }
-  redirectBasedOnRole() {
-    const token = this.authService.getToken();
-console.log('token is :',token);
-    if (token) {
-      const decodedToken = this.authService.decodeToken(token);
-      const authorities: string[] = decodedToken.authorities;
-      console.log('authorities is :',authorities);
 
-      if (authorities.includes('Admin')) {
-        this.router.navigate(['/dashbord']); // Redirect to admin dashboard
-      } else if (authorities.includes('SubscribedClient')) {
-        this.router.navigate(['/client-dashboard']); // Redirect to client dashboard
-      } else {
-        this.router.navigate(['/dashboard']); // Redirect to user dashboard
-      }
-    } else {
-      this.router.navigate(['/login']); // Token not found, redirect to login page
-    }
-
-
-
-  }
 
 }

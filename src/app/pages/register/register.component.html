@@ -23,6 +23,9 @@
           <div class="card-header bg-transparent pb-5">
             <div class="text-muted text-center mt-2 mb-3"><small>Sign up with credentials</small></div>
           </div>
+          <a class="navbar-brand pt-0 d-flex justify-content-center" routerLinkActive="active" [routerLink]="['/login']">
+            <img src="./assets/img/parkini1.png" class="navbar-brand-img" alt="Parkini Logo" width="200" height="auto">
+          </a>
           <div class="card-body px-lg-5 py-lg-5">
             <form role="form" #registerForm="ngForm" (ngSubmit)="register(registerForm)">
               <div class="form-group mb-3">

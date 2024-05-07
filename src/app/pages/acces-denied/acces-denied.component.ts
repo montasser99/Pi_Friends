@@ -11,6 +11,10 @@ export class AccesDeniedComponent {
   constructor(private router: Router) {}
 
   redirectToDashboard() {
-    this.router.navigate(['users']);
+    // Navigate to the dashboard route
+    this.router.navigate(['/dashboard']).then(() => {
+      // Reload the page after navigating to the dashboard
+      window.location.reload();
+    });
   }
 }

@@ -3,6 +3,7 @@ import { Feedback } from 'src/app/Model/Feedback';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { feedbackService } from 'src/app/Service/feedbackService';
 import { JwtDecodeService } from 'src/app/Service/JwtDecodeService';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-feedback-user',
@@ -19,40 +20,54 @@ import { JwtDecodeService } from 'src/app/Service/JwtDecodeService';
 })
 export class FeedbackUserComponent implements OnInit {
     feedback: Feedback = new Feedback();
-    submitted = false;
-    stars: number[] = [1, 2, 3, 4, 5]; // Array to generate stars
+    allFeedback: Feedback[] = [];
+    hasSubmittedFeedback: boolean = false;
+    stars: number[] = [1, 2, 3, 4, 5];
     starState = '';
-    decodedToken:any;
-    constructor(private feedbackService: feedbackService , private jwtDecodeService : JwtDecodeService) {}
+    decodedToken: any;
+
+    constructor(
+        private feedbackService: feedbackService,
+        private jwtDecodeService: JwtDecodeService,
+        private toastr: ToastrService
+    ) {}
 
     ngOnInit(): void {
-        // Initialize the original rating
-        this.feedback.rating = 0;
+        this.getAllFeedback(); // Fetch all feedback when component initializes
         const token = localStorage.getItem('jwt_token');
         if (token) {
-          this.decodedToken = this.jwtDecodeService.decodeToken(); // Assign decoded token to decodedToken property
-          console.log('Decoded token:', this.decodedToken);
+            this.decodedToken = this.jwtDecodeService.decodeToken();
+            console.log('Decoded token:', this.decodedToken);
         } else {
-          console.log('Token not found in local storage');
+            console.log('Token not found in local storage');
         }
     }
 
+    getAllFeedback(): void {
+        this.feedbackService.findAll().subscribe(
+            (data: Feedback[]) => {
+                this.allFeedback = data;
+                // Check if the user has already submitted feedback
+                this.hasSubmittedFeedback = this.allFeedback.some(feedback => feedback.email === this.decodedToken.sub);
+            },
+            error => {
+                console.error('Error fetching feedback:', error);
+            }
+        );
+    }
+
     addFeedback(): void {
-      this.feedback.email=this.decodedToken.sub;
+        this.feedback.email = this.decodedToken.sub;
         this.feedbackService.addFeedback(this.feedback).subscribe({
             next: response => {
                 console.log(response);
-                this.submitted = true;
+                this.toastr.success('Feedback added successfully!', 'Success');
+                this.hasSubmittedFeedback = true; // Update flag indicating that feedback has been submitted
             },
             error: error => {
                 console.log(error);
             },
         });
-    }
-
-    newFeedback(): void {
-        this.submitted = false;
-        this.feedback = new Feedback();
     }
 
     setRating(rating: number): void {

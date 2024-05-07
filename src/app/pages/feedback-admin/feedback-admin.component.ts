@@ -17,18 +17,23 @@ export class FeedbackAdminComponent implements OnInit {
   itemsPerPage: number = 6;
   totalPages: number;
   pages: number[] = [];
+  hasFeedbacks: boolean = true;
 
   constructor(private feedbackService: feedbackService) { }
 
   ngOnInit(): void {
     this.feedbackService.findAll().subscribe(data => {
       this.feedbacks = data;
-      this.calculateAverageRating();
-      //pagination code here
-      this.totalPages = Math.ceil(this.feedbacks.length / this.itemsPerPage);
-      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-      this.setPage(this.currentPage);
-      //end code pagination
+      if (this.feedbacks.length === 0) {
+        this.hasFeedbacks = false;
+      } else {
+        this.calculateAverageRating();
+        //pagination code here
+        this.totalPages = Math.ceil(this.feedbacks.length / this.itemsPerPage);
+        this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+        this.setPage(this.currentPage);
+        //end code pagination
+      }
     });
   }
 
@@ -39,7 +44,6 @@ export class FeedbackAdminComponent implements OnInit {
       this.averageRating = Number(average.toFixed(2));
     }
   }
-
 
   //pagination code here
   setPage(page: number) {
